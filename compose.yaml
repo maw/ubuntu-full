@@ -12,7 +12,6 @@ services:
       - ${HOME}/.zshrc:${HOME}/.zshrc
       - ${HOME}/.zsh-nvm:${HOME}/.zsh-nvm
       - ${HOME}/.oh-my-zsh:${HOME}/.oh-my-zsh
-      - /etc:/etc
       - ${PWD}:/work
       - ubuntu-full-rustup:${HOME}/.rustup
       - ubuntu-full-cargo:${HOME}/.cargo

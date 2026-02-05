@@ -20,7 +20,6 @@ docker run -it -u "$UID:$GID" \
        -v "$home/.zshrc":"$home/.zshrc" \
        -v "$home/.zsh-nvm:$home/.zsh-nvm" \
        -v "$home/.oh-my-zsh:$home/.oh-my-zsh" \
-       -v /etc:/etc \
        -v "$(pwd):/work" \
        -v ubuntu-full-rustup:"$home/.rustup" \
        -v ubuntu-full-cargo:"$home/.cargo" \
