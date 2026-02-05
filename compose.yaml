@@ -1,0 +1,23 @@
+services:
+  dev:
+    build: .
+    image: ubuntu-full:latest
+    user: "${UID}:${GID}"
+    stdin_open: true
+    tty: true
+    command: zsh
+    working_dir: /work
+    volumes:
+      - ubuntu-full-home:/home/
+      - ${HOME}/.zshrc:${HOME}/.zshrc
+      - ${HOME}/.zsh-nvm:${HOME}/.zsh-nvm
+      - ${HOME}/.oh-my-zsh:${HOME}/.oh-my-zsh
+      - /etc:/etc
+      - ${PWD}:/work
+      - ubuntu-full-rustup:${HOME}/.rustup
+      - ubuntu-full-cargo:${HOME}/.cargo
+
+volumes:
+  ubuntu-full-home:
+  ubuntu-full-rustup:
+  ubuntu-full-cargo:

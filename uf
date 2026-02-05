@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dir="$(cd "$(dirname "$0")" && pwd)"
+exec docker compose -f "$dir/compose.yaml" run --rm dev "$@"
