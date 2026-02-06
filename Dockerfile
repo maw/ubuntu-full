@@ -13,12 +13,21 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 
 COPY --from=docker.io/rust:1.91.1-bullseye $RUSTUP_HOME $RUSTUP_HOME
 COPY --from=docker.io/rust:1.91.1-bullseye $CARGO_HOME $CARGO_HOME
+RUN chmod -R a+rwX $RUSTUP_HOME $CARGO_HOME
 
 COPY --from=docker.io/golang:1.25.4-trixie /go /go
 COPY --from=docker.io/golang:1.25.4-trixie /usr/local/go /usr/local/go
 
 COPY --from=docker.io/astral/uv:latest /uv /uvx /bin/
 
+COPY rust.sh /rust.sh
+RUN chmod +x /rust.sh
+RUN /rust.sh
+
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 ENV PATH=/go/bin:/usr/local/go/bin:$PATH
 

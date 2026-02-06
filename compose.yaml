@@ -2,21 +2,32 @@ services:
   dev:
     build: .
     image: ubuntu-full:latest
-    user: "${UID}:${GID}"
     stdin_open: true
     tty: true
     command: zsh
     working_dir: /work
+    environment:
+      - HOME=${HOME}
+      - TARGET_UID=${UID}
+      - TARGET_GID=${GID}
     volumes:
       - ubuntu-full-home:/home/
       - ${HOME}/.zshrc:${HOME}/.zshrc
       - ${HOME}/.zsh-nvm:${HOME}/.zsh-nvm
       - ${HOME}/.oh-my-zsh:${HOME}/.oh-my-zsh
+      - ${HOME}/configuration:${HOME}/configuration
       - ${PWD}:/work
-      - ubuntu-full-rustup:${HOME}/.rustup
-      - ubuntu-full-cargo:${HOME}/.cargo
+      - ubuntu-full-rustup:/usr/local/rustup
+      - ubuntu-full-cargo:/usr/local/cargo
+      - ubuntu-full-go:${HOME}/go
+      - ubuntu-full-histfile:${HOME}/.histfile
+      - ubuntu-full-ssh:${HOME}/.ssh
+
 
 volumes:
   ubuntu-full-home:
   ubuntu-full-rustup:
   ubuntu-full-cargo:
+  ubuntu-full-go:
+  ubuntu-full-histfile:
+  ubuntu-full-ssh:
