@@ -20,6 +20,16 @@ COPY --from=docker.io/golang:1.25.4-trixie /usr/local/go /usr/local/go
 
 COPY --from=docker.io/astral/uv:latest /uv /uvx /bin/
 
+# Node.js + pnpm (via corepack)
+COPY --from=docker.io/node:22-slim /usr/local/bin/node /usr/local/bin/
+COPY --from=docker.io/node:22-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=docker.io/node:22-slim /usr/local/include/node /usr/local/include/node
+RUN ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
+    && ln -s ../lib/node_modules/corepack/dist/corepack.js /usr/local/bin/corepack
+ENV COREPACK_HOME=/usr/local/share/corepack
+RUN corepack enable pnpm && corepack prepare pnpm@latest --activate
+
 COPY rust.sh /rust.sh
 RUN chmod +x /rust.sh
 RUN /rust.sh

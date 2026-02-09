@@ -9,6 +9,7 @@ pre-installed.
 - **C/C++**: build-essential, clang, gdb, lldb
 - **Rust** 1.91.1 (copied from official image)
 - **Go** 1.25.4 (copied from official image)
+- **Node.js** 22 + pnpm (copied from official image, pnpm via corepack)
 - **Python**: uv/uvx (copied from official image)
 - **Utilities**: git, ripgrep, tmux, zsh, vim, curl, mosh, direnv, sqlite3,
   and more (see `packaged.sh` for the full list)
@@ -46,7 +47,7 @@ Cargo registry, Go packages, shell history, and SSH config.
 
 | File | Purpose |
 |------|---------|
-| `Dockerfile` | Image definition; multi-stage copies for Rust, Go, and uv |
+| `Dockerfile` | Image definition; multi-stage copies for Rust, Go, uv, and Node.js |
 | `compose.yaml` | Service, volumes, and bind mounts |
 | `packaged.sh` | apt packages installed during build |
 | `entrypoint.sh` | Chowns volumes and drops privileges |

@@ -8,14 +8,15 @@ production work.
 
 An Ubuntu 24.04-based Docker image bundling a broad set of development tools:
 C/C++ (build-essential, clang, gdb, lldb), Rust (copied from official image),
-Go (copied from official image), Python tooling (uv/uvx), plus common
+Go (copied from official image), Node.js 22 + pnpm (copied from official
+image, pnpm via corepack), Python tooling (uv/uvx), plus common
 utilities (git, ripgrep, tmux, zsh, etc.). The full package list is in
 `packaged.sh`.
 
 ## Structure
 
-- `Dockerfile` — image definition; uses multi-stage copies for Rust, Go, and
-  uv
+- `Dockerfile` — image definition; uses multi-stage copies for Rust, Go, uv,
+  and Node.js
 - `compose.yaml` — declares the build, volumes, and mounts
 - `packaged.sh` — apt packages installed during build
 - `uf` — launcher script; can be symlinked/aliased onto `$PATH`
