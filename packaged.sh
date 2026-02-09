@@ -30,6 +30,7 @@ DEBIAN_FRONTEND=noninteractive apt install -q -y \
                                snapd \
                                software-properties-common \
                                sqlite3 \
+                               sudo \
                                tmux \
                                traceroute \
                                vim \
