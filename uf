@@ -1,7 +1,13 @@
 #!/bin/bash
 
+dir="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+
+if [ "$1" = "--root" ]; then
+    shift
+    exec docker compose -f "$dir/compose.yaml" run --rm \
+        -e TARGET_UID= -e TARGET_GID= --user root dev "$@"
+fi
+
 export UID
 export GID="$(id -g)"
-
-dir="$(cd "$(dirname "$0")" && pwd)"
 exec docker compose -f "$dir/compose.yaml" run --rm dev "$@"
