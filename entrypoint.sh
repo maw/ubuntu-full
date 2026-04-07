@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ -n "$TARGET_UID" ]; then
-    USERNAME="user"
-    groupadd -g "$TARGET_GID" "$USERNAME" 2>/dev/null
-    useradd -u "$TARGET_UID" -g "$TARGET_GID" -s /bin/zsh -d "$HOME" -M "$USERNAME" 2>/dev/null
+    groupadd -g "$TARGET_GID" user 2>/dev/null
+    useradd -u "$TARGET_UID" -g "$TARGET_GID" -s /bin/zsh -d "$HOME" -M user 2>/dev/null
+    USERNAME=$(getent passwd "$TARGET_UID" | cut -d: -f1)
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/"$USERNAME"
 
     chown "$TARGET_UID:$TARGET_GID" \
