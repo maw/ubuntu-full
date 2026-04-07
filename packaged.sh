@@ -8,6 +8,7 @@ apt update
 # Keep the list of packages sorted
 PACKAGES="
 autoconf
+bind9-dnsutils
 binutils
 build-essential
 caddy
